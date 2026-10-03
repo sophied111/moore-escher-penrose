@@ -1,0 +1,38 @@
+# FLUX.1-dev conformal Droste preset -- the paper's own defaults (Tables 1-4).
+# These values are shipped as-is from the paper; do not "tune" them here.
+backbone: flux
+model_id: black-forest-labs/FLUX.1-dev
+num_steps: 128
+cfg_scale: 3.5
+
+family: conformal
+inset_scale: 0.25
+periods: 2          # operator-window twist p (reference --tc_periods_sched 0,2:
+                    # slot 0 = warm-up p=0, slot 1 = window p=2). Warm-up is
+                    # always p=0 in the sampler regardless of this value.
+# Operator-window radial zoom. The reference requests 1.3 but clamps it via
+# effective_zoom (zoom_clamp=True, default n_turn=1/s=None) into the sharp
+# window; at the window ops' 4096^2 raster (after x4 SR) with centred focus that
+# clamp resolves to this exact constant, so 1.3 never actually reaches the warp.
+# Baked in rather than porting the clamp (preset fixed at 1024 out / 4096 SR).
+# Warm-up uses its own 1024^2-resolved value (WARMUP_CONF_ZOOM in base.py).
+zoom: 0.4973785400390625
+supersample: 1      # reference --tc_sup 1 (single sample; no antialias supersampling)
+
+sigma_hi: 0.87
+sigma_lo: 0.5
+n_ops: 3
+op_gap: 9
+warmup_sigma: 0.95
+
+size: 1024   # output images are square (size x size)
+
+upres: sr
+
+# Post-loop time travel: re-noise the finished estimate to sigma=0.75 and
+# re-denoise the schedule tail once, WITHOUT operators. This is the refinement
+# pass that sharpens the soft pixel-roundtrip warp output into the final image
+# (the "tt75" in the reference run label ..._s4w2_tt75_sd7). Omitting it leaves
+# the output as an unrefined warp texture -- it is NOT optional for a usable
+# result. Reference: antique_sr.sbatch --time-travel-n 1 --time-travel-sigma 0.75.
+time_travel: [1, 0.75]

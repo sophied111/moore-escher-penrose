@@ -1,0 +1,55 @@
+[project]
+name = "escher"
+version = "0.1.0"
+description = "Conformal T-cycle braided sampling for recursive (Print-Gallery / Droste) image generation with frozen diffusion models."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Anonymous" }]
+# Core is backbone-agnostic (transforms / sampler / schedule). The backbone
+# stacks live in the mutually-exclusive [flux] / [pixeldit] extras below.
+dependencies = [
+    "numpy>=1.24",
+    "pillow>=10.0",
+    "pyyaml>=6.0",
+    "torch>=2.5",
+]
+
+[project.optional-dependencies]
+# [flux] and [pixeldit] share the same core stack (torch / diffusers /
+# transformers); the byte-identical reference runs used a single venv for both.
+# [pixeldit] only adds the PixelDiT submodule's framework deps. For the exact
+# pinned, byte-reproducible versions see requirements-{flux,pixeldit}.lock.txt.
+flux = [
+    "diffusers>=0.37.1",
+    "transformers>=5.6.2",
+    "accelerate>=1.2.0",
+    "torch>=2.11.0",
+]
+pixeldit = [
+    "diffusers>=0.37.1",
+    "transformers>=5.6.2",
+    "accelerate>=1.2.0",
+    "torch>=2.11.0",
+    "timm>=1.0.27",
+    "pyrallis",
+    "jsonargparse[signatures]",
+    "omegaconf",
+    "termcolor",
+    "huggingface_hub",
+]
+# No-op alias: SR (Real-ESRGAN x4) is vendored in pure torch, so it needs no
+# extra dependencies. Kept so `pip install escher[sr]` stays valid.
+sr = []
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+escher = "cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["cli", "interactive", "batch_run"]
+packages = ["escher", "escher.transforms", "escher.backbones"]

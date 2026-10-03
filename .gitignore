@@ -1,0 +1,14 @@
+outputs/
+__pycache__/
+*.pyc
+.venv/
+*.pth
+weights/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.claude/
+.superpowers/
+docs/superpowers/
+tests/
