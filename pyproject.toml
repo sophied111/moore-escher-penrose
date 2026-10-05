@@ -1,6 +1,6 @@
 [project]
 name = "escher"
-version = "0.1.0"
+version = "0.1.1"
 description = "Conformal T-cycle braided sampling for recursive (Print-Gallery / Droste) image generation with frozen diffusion models."
 readme = "README.md"
 requires-python = ">=3.10"
