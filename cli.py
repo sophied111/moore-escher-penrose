@@ -40,7 +40,7 @@ def _build_parser() -> argparse.ArgumentParser:
     # --preset always has a real default: it picks which SampleConfig we
     # start from, so it is not itself an "override".
     p.add_argument("--preset", default="flux_conformal",
-                    help="preset name (configs/<name>.yaml) or a path to a YAML file")
+                    help="preset name (escher/configs/<name>.yaml) or a path to a YAML file")
 
     # Every flag below defaults to argparse.SUPPRESS so an unset flag leaves
     # no attribute on the parsed namespace at all -- that absence is exactly

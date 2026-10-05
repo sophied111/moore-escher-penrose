@@ -39,14 +39,14 @@ PROMPT="a photorealistic gallery whose far wall is a photo of the same gallery, 
 if [[ "${TARGET}" == "all" || "${TARGET}" == "flux" ]]; then
   # --- FLUX section (run in the [flux] environment) -----------------------
   # Headline FLUX.1-dev conformal Print-Gallery repro (paper Tables 1-4
-  # defaults, via configs/flux_conformal.yaml). ~45GB VRAM with the SR upres
+  # defaults, via escher/configs/flux_conformal.yaml). ~45GB VRAM with the SR upres
   # path this preset uses by default -- see scripts/README.md.
   python -m cli --preset flux_conformal     --prompt "${PROMPT}"     --seed 100 --output-dir outputs --output smoke_flux.png
 fi
 
 if [[ "${TARGET}" == "all" || "${TARGET}" == "pixeldit" ]]; then
   # --- PixelDiT section (run in a SEPARATE [pixeldit] environment) --------
-  # PixelDiT-1300M conformal repro (configs/pixeldit_conformal.yaml), the
+  # PixelDiT-1300M conformal repro (escher/configs/pixeldit_conformal.yaml), the
   # paper's re-matched schedule for the smaller backbone (warm-up 0.96,
   # sigma_hi 0.92, sigma_lo 0.69). Requires the [pixeldit] extra, the
   # initialized third_party/PixelDiT submodule and the HF weights

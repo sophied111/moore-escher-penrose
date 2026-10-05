@@ -108,7 +108,7 @@ Example output:
 
 ## Knobs
 
-`--preset` names a YAML under [`configs/`](configs/) (default `flux_conformal`);
+`--preset` names a YAML under [`escher/configs/`](escher/configs/) (default `flux_conformal`);
 any flag you pass overrides it. Recursion knobs:
 
 | Flag | Meaning |
@@ -129,8 +129,8 @@ Also `--model`, `--backbone`, `--steps`, `--cfg-scale`, `--seed`, `--size`,
 `python -m cli --help` is authoritative.
 
 Two presets ship, both the paper's own defaults:
-`configs/flux_conformal.yaml` (FLUX.1-dev, Tables 1-4) and
-`configs/pixeldit_conformal.yaml` (PixelDiT-1300M, re-matched schedule). Copy one
+`escher/configs/flux_conformal.yaml` (FLUX.1-dev, Tables 1-4) and
+`escher/configs/pixeldit_conformal.yaml` (PixelDiT-1300M, re-matched schedule). Copy one
 and point `--preset` at it for your own.
 
 ## Extending: transform families

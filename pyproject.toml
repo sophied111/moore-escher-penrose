@@ -53,3 +53,7 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 py-modules = ["cli", "interactive", "batch_run"]
 packages = ["escher", "escher.transforms", "escher.backbones"]
+
+[tool.setuptools.package-data]
+# Ship the preset YAMLs inside the wheel so load_preset() works from an install.
+escher = ["configs/*.yaml"]

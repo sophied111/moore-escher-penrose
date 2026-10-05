@@ -40,7 +40,7 @@ free-denoise ... warm-up (p=0 Droste) ... T -> T† -> T window ... free-denoise
    "warped end" convention, so the window always closes on the forward
    twist rather than its inverse. The paper's own conformal schedule uses
    `sigma_hi=0.87`, `op_gap=9`, `sigma_lo=0.5` (see
-   `configs/flux_conformal.yaml`). At each of these steps the sampler
+   `escher/configs/flux_conformal.yaml`). At each of these steps the sampler
    predicts `x0`, optionally super-resolves it (`--upres`), applies the
    scheduled `T` or `T†` from the selected family, and re-noises.
 
@@ -49,7 +49,7 @@ free-denoise ... warm-up (p=0 Droste) ... T -> T† -> T window ... free-denoise
    schedule's tail is re-denoised `tt_n` times with *no* operators applied
    -- a pure refinement pass that lets the backbone smooth over the pixel
    warps' seams without disturbing the global recursive structure it just
-   built. `configs/pixeldit_conformal.yaml` uses one such pass
+   built. `escher/configs/pixeldit_conformal.yaml` uses one such pass
    (`time_travel: [1, 0.82]`); the FLUX preset does not use time travel.
 
 Fresh noise is only ever injected inside `backbone.renoise`; ordinary steps
